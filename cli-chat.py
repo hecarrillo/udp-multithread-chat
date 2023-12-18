@@ -22,17 +22,14 @@ def receiver(usr, prt):
 
         # New user join the server
         if query.get('type') == 0:
-            print('\n[{}] has join the session\n'.format(query.get('user')))
+            print(f"\n[{query.get('user')}] has join the session\n")
 
-        # Message to multicast group
         elif query['type'] == 1:
             print('<', query.get('user'), '>', query.get('message'))
 
-        # User left the server
         elif query['type'] == 2:
-            print('\n[{}] has left the session'.format(query.get('user')))
+            print(f"\n[{query.get('user')}] has left the session")
 
-        # List of users in room chat server
         elif query['type'] == 3:
             print('\n', query['message'])
 
@@ -50,7 +47,6 @@ def sender(usr, typ, prt):
         'port': prt
     }
     sock.sendto(json.dumps(multicast).encode(), server_address)
-    typ = b''
 
     while True:
         msg = input(' ')
